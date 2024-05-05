@@ -23,7 +23,7 @@ resource "google_api_gateway_api_config" "api_gw" {
       for_each = var.gateway_config
       content {
         backend_config {
-          google_service_account = gateway_config.backend_config.google_service_account  
+          google_service_account = gateway_config.value.backend_config.google_service_account  
         } 
       }
     }
@@ -32,8 +32,8 @@ resource "google_api_gateway_api_config" "api_gw" {
       for_each = var.openapi_documents
       content {
         document {
-          path      = openapi_documents.document.open_api_document_path
-          contents  = base64encode(openapi_documents.document.open_api_document_path)
+          path      = openapi_documents.value.document.open_api_document_path
+          contents  = filebase64(openapi_documents.value.document.open_api_document_path)
         }
       }
     }
@@ -42,14 +42,14 @@ resource "google_api_gateway_api_config" "api_gw" {
       for_each = var.grpc_services
       content {
         file_descriptor_set {
-          path      = grpc_services.file_descriptor_set.path
-          contents  = grpc_services.file_descriptor_set.contents
+          path      = grpc_services.value.file_descriptor_set.path
+          contents  = grpc_services.value.file_descriptor_set.contents
         }
         dynamic "source" {
-          for_each = grpc_services.source
+          for_each = grpc_services.value.source
           content {
-            path      = source.path
-            contents  = source.contents
+            path      = source.value.path
+            contents  = source.value.contents
           }
         }
       }
@@ -59,8 +59,8 @@ resource "google_api_gateway_api_config" "api_gw" {
       for_each = var.managed_service_configs
 
       content {
-        path      = managed_service_configs.path
-        contents  = managed_service_configs.contents
+        path      = managed_service_configs.value.path
+        contents  = managed_service_configs.value.contents
       }
     }
 
