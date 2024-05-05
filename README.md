@@ -12,7 +12,7 @@ Basic usage of this module is as follows:
 
 ```hcl
 module "api-gateway" {
-  source  = "github.com/vinodbadgujar/terraform-google-api-gateway"
+  source  = "vinodbadgujar/api-gateway/google"
   
   project = "<project_id>"
     labels = {
