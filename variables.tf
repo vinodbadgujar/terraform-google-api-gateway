@@ -66,7 +66,6 @@ variable "gateway_config" {
     )
   )
   default   = []
-  sensitive = true
 }
 
 variable "openapi_documents" {
@@ -83,7 +82,6 @@ variable "openapi_documents" {
       )
     )
     default   = []
-    sensitive = true
 }
 
 variable "grpc_services" {
@@ -107,7 +105,6 @@ variable "grpc_services" {
     )
   )
   default = []
-  sensitive = true
 }
 
 variable "managed_service_configs" {
